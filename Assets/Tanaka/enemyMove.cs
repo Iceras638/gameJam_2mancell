@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class enemyMove : MonoBehaviour
 {
-    public float speed;
+    public float speed,speed2;
+    float second;
+    bool stopFlag;
     // Start is called before the first frame update
     void Start()
     {
-        
+        stopFlag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(stopFlag == true)
+        {
+            second += Time.deltaTime;
+            if(second >= 3)
+            {
+                speed = speed2;
+                stopFlag = false;
+                second = 0;
+            }
+        }
+
         if (this.tag == "Uenemy")
         {
             transform.position += new Vector3(0, -speed);
@@ -41,5 +55,12 @@ public class enemyMove : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if(collision.gameObject.tag == "Player")
+        {
+            speed2 = speed;
+            speed = 0;
+            stopFlag = true;
+        }
     }
+
 }

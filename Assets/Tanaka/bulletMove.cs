@@ -20,7 +20,7 @@ public class bulletMove : MonoBehaviour
     void Update()
     {
         transform.position += new Vector3(x, y);
-        
+        Destroy(gameObject, 100);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

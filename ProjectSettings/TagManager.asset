@@ -11,6 +11,8 @@ TagManager:
   - Bullet
   - Wall
   - none
+  - NearWall
+  - UpPlayer
   layers:
   - Default
   - TransparentFX

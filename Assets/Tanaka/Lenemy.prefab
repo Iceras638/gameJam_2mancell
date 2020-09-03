@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2903329332501885159}
   - component: {fileID: 6967935873626001937}
   - component: {fileID: 5711309959260604211}
-  - component: {fileID: 2314818355932188596}
+  - component: {fileID: 6829593849316144179}
   m_Layer: 0
-  m_Name: Denemy
-  m_TagString: Denemy
+  m_Name: Lenemy
+  m_TagString: Lenemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.01
---- !u!50 &2314818355932188596
+  speed2: 0.01
+--- !u!50 &6829593849316144179
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

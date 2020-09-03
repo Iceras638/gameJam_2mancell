@@ -15,6 +15,8 @@ public class playerMove : MonoBehaviour
     public float x, y;
     [SerializeField]
     float speed;
+    int damage;
+    bool knockbackFlag;
 
     //Animator animator;   // アニメーション
 
@@ -22,17 +24,29 @@ public class playerMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        damage = 1;
         target = transform.position;
         //animator = GetComponent<Animator>();
+        knockbackFlag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(knockbackFlag == true)
+        {
+            gameObject.tag = "UpPlayer";
+        }
+        else
+        {
+            gameObject.tag = "Player";
+        }
 
         // ① 移動中かどうかの判定。移動中でなければ入力を受付
         if (transform.position == target)
         {
+            knockbackFlag = false;
+
             SetTargetPosition();
         }
         Move();
@@ -94,36 +108,76 @@ public class playerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "Uenemy")
         {
-            target = transform.position - MOVEY * 10;
+            knockbackFlag = true;
+            target = prevPos;
+            if (transform.position == target)
+            {
+
+                target = transform.position - MOVEY * damage;
+            }
+            damage++;
 
         }
         if (collision.gameObject.tag == "Renemy")
         {
-            target = transform.position - MOVEX * 10;
+            knockbackFlag = true;
+
+            target = prevPos;
+            if (transform.position == target)
+            {
+
+                target = transform.position - MOVEX * damage;
+            }
+            damage++;
 
         }
         if (collision.gameObject.tag == "Lenemy")
         {
-            target = transform.position + MOVEX * 10;
+            knockbackFlag = true;
+
+            target = prevPos;
+            if (transform.position == target)
+            {
+
+                target = transform.position + MOVEX * damage;
+            }
+            damage++;
 
         }
         if (collision.gameObject.tag == "Denemy")
         {
-            target = transform.position + MOVEY * 10;
+            knockbackFlag = true;
+
+            target = prevPos;
+            if (transform.position == target)
+            {
+                target = transform.position + MOVEY * damage;
+            }
+            damage++;
 
         }
 
-        if(collision.gameObject.tag == "none")
+        if (collision.gameObject.tag == "none")
         {
-            target = prevPos;
+            if (knockbackFlag == false) 
+            {
+                target = prevPos;
+            }
 
+        }
+
+        if(collision.gameObject.tag == "NearWall")
+        {
+            prevPos = collision.gameObject.transform.position;
         }
 
         if (collision.gameObject.tag =="Wall")
         {
-            target = transform.position;
+            target = prevPos;
+            knockbackFlag = false;
         }
     }
 }
