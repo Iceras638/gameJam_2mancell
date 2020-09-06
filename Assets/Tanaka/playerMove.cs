@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerMove : MonoBehaviour
 {
@@ -14,9 +15,13 @@ public class playerMove : MonoBehaviour
     public GameObject bullet;
     public float x, y;
     [SerializeField]
-    float speed;
+    float speed,second;
     int damage;
-    bool knockbackFlag;
+    bool knockbackFlag, shotFlag;
+
+    GameObject ManageObject,waveObj;
+    SceneFadeManager fadeManager;
+    waveManager waveManage;
 
     //Animator animator;   // アニメーション
 
@@ -24,6 +29,13 @@ public class playerMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        ManageObject = GameObject.Find("ManagerObj");
+        fadeManager = ManageObject.GetComponent<SceneFadeManager>();
+        waveObj = GameObject.Find("WaveManager");
+        waveManage=waveObj.GetComponent<waveManager>();
+
+        speed = waveManage.BulletSpeed;
+
         damage = 1;
         target = transform.position;
         //animator = GetComponent<Animator>();
@@ -33,11 +45,12 @@ public class playerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speed = waveManage.BulletSpeed;
         if(knockbackFlag == true)
         {
             gameObject.tag = "UpPlayer";
         }
-        else
+        if(knockbackFlag == false)
         {
             gameObject.tag = "Player";
         }
@@ -46,8 +59,11 @@ public class playerMove : MonoBehaviour
         if (transform.position == target)
         {
             knockbackFlag = false;
-
             SetTargetPosition();
+        }
+        else
+        {
+            //gameObject.tag = "MovePlayer";
         }
         Move();
     }
@@ -60,7 +76,8 @@ public class playerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             target = transform.position - MOVEX;
-            Instantiate(bullet,transform.position,Quaternion.identity);
+                Instantiate(bullet, transform.position, Quaternion.identity);
+
             x = speed;
             y = 0;
             return;
@@ -68,7 +85,8 @@ public class playerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             target = transform.position + MOVEX;
-            Instantiate(bullet, transform.position, Quaternion.identity);
+                Instantiate(bullet, transform.position, Quaternion.identity);
+
             x = -speed;
             y = 0;
 
@@ -77,7 +95,8 @@ public class playerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             target = transform.position - MOVEY;
-            Instantiate(bullet, transform.position, Quaternion.identity);
+                Instantiate(bullet, transform.position, Quaternion.identity);
+
             x = 0;
             y = speed;
 
@@ -86,7 +105,8 @@ public class playerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             target = transform.position + MOVEY;
-            Instantiate(bullet, transform.position, Quaternion.identity);
+                Instantiate(bullet, transform.position, Quaternion.identity);
+
             x = 0;
             y = -speed;
 
@@ -108,55 +128,58 @@ public class playerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (collision.gameObject.tag == "Uenemy")
+        if (this.gameObject.tag == "Player" || this.gameObject.tag == "MovePlayer") 
         {
-            knockbackFlag = true;
-            target = prevPos;
-            if (transform.position == target)
+            if (collision.gameObject.tag == "Uenemy")
             {
+                knockbackFlag = true;
+                target = prevPos;
+                if (transform.position == prevPos)
+                {
 
-                target = transform.position - MOVEY * damage;
+                    target = transform.position - MOVEY * 10;
+                }
+                damage++;
+
             }
-            damage++;
-
-        }
-        if (collision.gameObject.tag == "Renemy")
-        {
-            knockbackFlag = true;
-
-            target = prevPos;
-            if (transform.position == target)
+            if (collision.gameObject.tag == "Renemy")
             {
+                knockbackFlag = true;
 
-                target = transform.position - MOVEX * damage;
+                target = prevPos;
+                if (transform.position == prevPos)
+                {
+
+                    target = transform.position - MOVEX * 10;
+                }
+                damage++;
+
             }
-            damage++;
-
-        }
-        if (collision.gameObject.tag == "Lenemy")
-        {
-            knockbackFlag = true;
-
-            target = prevPos;
-            if (transform.position == target)
+            if (collision.gameObject.tag == "Lenemy")
             {
+                knockbackFlag = true;
 
-                target = transform.position + MOVEX * damage;
+                target = prevPos;
+                if (transform.position == prevPos)
+                {
+
+                    target = transform.position + MOVEX * 10;
+                }
+                damage++;
+
             }
-            damage++;
-
-        }
-        if (collision.gameObject.tag == "Denemy")
-        {
-            knockbackFlag = true;
-
-            target = prevPos;
-            if (transform.position == target)
+            if (collision.gameObject.tag == "Denemy")
             {
-                target = transform.position + MOVEY * damage;
+                knockbackFlag = true;
+
+                target = prevPos;
+                if (transform.position == prevPos)
+                {
+                    target = transform.position + MOVEY * 10;
+                }
+                damage++;
+
             }
-            damage++;
 
         }
 
@@ -164,7 +187,8 @@ public class playerMove : MonoBehaviour
         {
             if (knockbackFlag == false) 
             {
-                target = prevPos;
+                fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
+
             }
 
         }

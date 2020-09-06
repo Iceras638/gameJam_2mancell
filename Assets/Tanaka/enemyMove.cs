@@ -7,9 +7,20 @@ public class enemyMove : MonoBehaviour
     public float speed,speed2;
     float second;
     bool stopFlag;
+    [SerializeField]
+    GameObject deadParticle;
+    GameObject waveObj;
+    waveManager waveManage;
+
     // Start is called before the first frame update
     void Start()
     {
+        waveObj = GameObject.Find("WaveManager");
+        waveManage = waveObj.GetComponent<waveManager>();
+
+        speed = waveManage.EnemySpeed;
+        speed2 = waveManage.EnemySpeed;
+
         stopFlag = false;
     }
 
@@ -26,6 +37,12 @@ public class enemyMove : MonoBehaviour
                 stopFlag = false;
                 second = 0;
             }
+        }
+        else
+        {
+            speed = waveManage.EnemySpeed;
+            speed2 = waveManage.EnemySpeed;
+
         }
 
         if (this.tag == "Uenemy")
@@ -53,6 +70,8 @@ public class enemyMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet") 
         {
+            Instantiate(deadParticle, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
         if(collision.gameObject.tag == "Player")

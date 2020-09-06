@@ -13,6 +13,7 @@ TagManager:
   - none
   - NearWall
   - UpPlayer
+  - MovePlayer
   layers:
   - Default
   - TransparentFX

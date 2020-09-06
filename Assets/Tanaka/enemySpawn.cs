@@ -7,18 +7,23 @@ public class enemySpawn : MonoBehaviour
     public GameObject Uenemy,Renemy,Lenemy,Denemy;
     int number = 35;
     float second;
+    public float intarval;
+    GameObject waveObj;
+    waveManager waveManage;
     // Start is called before the first frame update
     void Start()
     {
-        
+        waveObj = GameObject.Find("WaveManager");
+        waveManage = waveObj.GetComponent<waveManager>();
+        intarval = waveManage.EnemySpawnInterval;
     }
 
     // Update is called once per frame
     void Update()
     {
         second += Time.deltaTime;
-
-        if(second >= 1)
+        intarval = waveManage.EnemySpawnInterval;
+        if(second >= intarval)
         {
             int rnd = Random.Range(0, number);
 

@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fall: {fileID: 4584844193283234212, guid: 5d64a59d1f84723418e14494c294fb7b, type: 3}
+  limit: 3
 --- !u!50 &7373488928543700800
 Rigidbody2D:
   serializedVersion: 4
