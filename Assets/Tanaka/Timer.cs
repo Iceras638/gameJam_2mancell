@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    private int Minute;
+    public static int Minute;
     [SerializeField]
-    private float Seconds;
+    public static float Seconds;
 
     private float oldSeconds;
     private Text timerText;

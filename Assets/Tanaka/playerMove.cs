@@ -17,7 +17,7 @@ public class playerMove : MonoBehaviour
     [SerializeField]
     float speed,second;
     int damage;
-    bool knockbackFlag, shotFlag;
+    bool knockbackFlag, shotFlag,deadFlag;
 
     GameObject ManageObject,waveObj;
     SceneFadeManager fadeManager;
@@ -40,6 +40,7 @@ public class playerMove : MonoBehaviour
         target = transform.position;
         //animator = GetComponent<Animator>();
         knockbackFlag = false;
+        deadFlag = false;
     }
 
     // Update is called once per frame
@@ -58,8 +59,12 @@ public class playerMove : MonoBehaviour
         // ① 移動中かどうかの判定。移動中でなければ入力を受付
         if (transform.position == target)
         {
-            knockbackFlag = false;
-            SetTargetPosition();
+            if(deadFlag==false)
+            {
+                knockbackFlag = false;
+                SetTargetPosition();
+
+            }
         }
         else
         {
@@ -187,8 +192,9 @@ public class playerMove : MonoBehaviour
         {
             if (knockbackFlag == false) 
             {
-                fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
+                deadFlag = true;
 
+                fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
             }
 
         }

@@ -126,6 +126,8 @@ MonoBehaviour:
   speed2: 0.01
   deadParticle: {fileID: 5528223968023095872, guid: 2e26b7e8b3f216a4094991897a1b89ac,
     type: 3}
+  hitParticle: {fileID: 5528223968023095872, guid: 49dbbcd655bf15044beffe2b278deadb,
+    type: 3}
 --- !u!50 &2314818355932188596
 Rigidbody2D:
   serializedVersion: 4

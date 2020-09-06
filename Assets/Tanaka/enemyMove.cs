@@ -8,7 +8,7 @@ public class enemyMove : MonoBehaviour
     float second;
     bool stopFlag;
     [SerializeField]
-    GameObject deadParticle;
+    GameObject deadParticle,hitParticle;
     GameObject waveObj;
     waveManager waveManage;
 
@@ -76,6 +76,8 @@ public class enemyMove : MonoBehaviour
         }
         if(collision.gameObject.tag == "Player")
         {
+            Instantiate(hitParticle, transform.position, Quaternion.identity);
+
             speed2 = speed;
             speed = 0;
             stopFlag = true;
