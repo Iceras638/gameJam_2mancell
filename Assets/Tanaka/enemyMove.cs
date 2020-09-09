@@ -64,6 +64,12 @@ public class enemyMove : MonoBehaviour
             transform.position += new Vector3(0, speed);
 
         }
+
+        if(transform.position.x > 15 || transform.position.x < -15
+            || transform.position.y > 15 || transform.position.y < -15)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
