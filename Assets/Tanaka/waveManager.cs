@@ -10,13 +10,13 @@ public class waveManager : MonoBehaviour
         EnemySpeed, EnemySpeedUp,
         GroundTime, GroundTimeDown,
         SpeedUpTime;
-    float second;
+    float second,speedlv;
     [SerializeField]
-    Text speedLv;
+    GameObject speedLv = null;
     // Start is called before the first frame update
     void Start()
     {
-        
+        speedlv = 1;
     }
 
     // Update is called once per frame
@@ -26,9 +26,23 @@ public class waveManager : MonoBehaviour
         if(second >= SpeedUpTime)
         {
             EnemySpawnInterval -= EnemySpawnIntervalDown;
+            if(EnemySpawnInterval <=  0.1f)
+            {
+                EnemySpawnInterval = 0.1f;
+            }
             EnemySpeed += EnemySpeedUp;
             GroundTime -= GroundTimeDown;
+            if(GroundTime <= 0.5f)
+            {
+                GroundTime = 0.5f;
+            }
+            speedlv++;
+
+            Text speedLvText = speedLv.GetComponent<Text>();
+            speedLvText.text = "Speed Lv:" + speedlv;
             second = 0;
         }
+
+
     }
 }

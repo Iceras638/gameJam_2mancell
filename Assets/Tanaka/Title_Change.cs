@@ -8,23 +8,27 @@ public class Title_Change : MonoBehaviour
     GameObject ManageObject;
     SceneFadeManager fadeManager;
     public bool GameOverFlag = false;
+    bool trigger;
 
     // Start is called before the first frame update
     void Start()
     {
         ManageObject = GameObject.Find("ManagerObj");
         fadeManager = ManageObject.GetComponent<SceneFadeManager>();
-
+        trigger = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (trigger == false)
         {
-            fadeManager.fadeOutStart(0, 0, 0, 0, "Title");
-
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                fadeManager.fadeOutStart(0, 0, 0, 0, "Title");
+                trigger = true;
+            }
         }
 
     }
