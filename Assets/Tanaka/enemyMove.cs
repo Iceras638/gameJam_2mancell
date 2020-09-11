@@ -9,14 +9,17 @@ public class enemyMove : MonoBehaviour
     bool stopFlag;
     [SerializeField]
     GameObject deadParticle,hitParticle;
-    GameObject waveObj;
+    GameObject waveObj,spawnObj;
     waveManager waveManage;
+    enemySpawn spawnManage;
 
     // Start is called before the first frame update
     void Start()
     {
         waveObj = GameObject.Find("WaveManager");
         waveManage = waveObj.GetComponent<waveManager>();
+        spawnObj = GameObject.Find("EnemySpawn");
+        spawnManage = spawnObj.GetComponent<enemySpawn>();
 
         speed = waveManage.EnemySpeed;
         speed2 = waveManage.EnemySpeed;
@@ -77,6 +80,8 @@ public class enemyMove : MonoBehaviour
         if (collision.gameObject.tag == "Bullet") 
         {
             Instantiate(deadParticle, transform.position, Quaternion.identity);
+            spawnManage.killCount++;
+            scoreManager.score += 300;
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

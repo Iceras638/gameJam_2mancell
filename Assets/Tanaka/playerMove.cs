@@ -23,7 +23,7 @@ public class playerMove : MonoBehaviour
     SceneFadeManager fadeManager;
     waveManager waveManage;
 
-    //Animator animator;   // アニメーション
+    Animator animator;   // アニメーション
 
 
     // Use this for initialization
@@ -38,7 +38,7 @@ public class playerMove : MonoBehaviour
 
         damage = 1;
         target = transform.position;
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         knockbackFlag = false;
         deadFlag = false;
     }
@@ -82,7 +82,7 @@ public class playerMove : MonoBehaviour
         {
             target = transform.position - MOVEX;
                 Instantiate(bullet, transform.position, Quaternion.identity);
-
+            SetAnimationParam(1);
             x = speed;
             y = 0;
             return;
@@ -91,6 +91,7 @@ public class playerMove : MonoBehaviour
         {
             target = transform.position + MOVEX;
                 Instantiate(bullet, transform.position, Quaternion.identity);
+            SetAnimationParam(2);
 
             x = -speed;
             y = 0;
@@ -101,6 +102,7 @@ public class playerMove : MonoBehaviour
         {
             target = transform.position - MOVEY;
                 Instantiate(bullet, transform.position, Quaternion.identity);
+            SetAnimationParam(3);
 
             x = 0;
             y = speed;
@@ -111,6 +113,7 @@ public class playerMove : MonoBehaviour
         {
             target = transform.position + MOVEY;
                 Instantiate(bullet, transform.position, Quaternion.identity);
+            SetAnimationParam(0);
 
             x = 0;
             y = -speed;
@@ -122,7 +125,7 @@ public class playerMove : MonoBehaviour
     // WalkParam  0;下移動　1;右移動　2:左移動　3:上移動
     void SetAnimationParam(int param)
     {
-        //animator.SetInteger("WalkParam", param);
+        animator.SetInteger("WalkParam", param);
     }
 
     // ③ 目的地へ移動する
@@ -193,7 +196,8 @@ public class playerMove : MonoBehaviour
             if (knockbackFlag == false) 
             {
                 deadFlag = true;
-
+                step = 0;
+                //target = transform.position;
                 fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
             }
 

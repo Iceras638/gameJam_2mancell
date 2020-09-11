@@ -12,6 +12,8 @@ public class groundFall : MonoBehaviour
 
     GameObject waveObj;
     waveManager waveManage;
+    GameObject spawnObj;
+    enemySpawn spawnManage;
 
     GameObject childGround,childNone;
 
@@ -21,6 +23,8 @@ public class groundFall : MonoBehaviour
     {
         waveObj = GameObject.Find("WaveManager");
         waveManage = waveObj.GetComponent<waveManager>();
+        spawnObj = GameObject.Find("EnemySpawn");
+        spawnManage = spawnObj.GetComponent<enemySpawn>();
 
         childGround = transform.GetChild(0).gameObject;
         childNone = transform.GetChild(1).gameObject;
@@ -68,6 +72,17 @@ public class groundFall : MonoBehaviour
                 childGround.SetActive(true);
                 second2 = 0;
                 fallFlag = false;
+            }
+
+            if(spawnManage.groundFlag == true)
+            {
+                childNone.SetActive(false);
+                childGround.SetActive(true);
+                second2 = 0;
+                fallFlag = false;
+                hitFlag = false;
+                second = 0;
+                alpha = 1;
             }
         }
     }

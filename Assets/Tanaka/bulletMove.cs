@@ -29,5 +29,13 @@ public class bulletMove : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(collision.gameObject.tag == "Uenemy"||
+            collision.gameObject.tag == "Renemy" ||
+            collision.gameObject.tag == "Denemy" ||
+            collision.gameObject.tag == "Lenemy" )
+        {
+            Destroy(gameObject);
+        }
     }
 }

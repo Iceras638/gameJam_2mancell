@@ -10,6 +10,8 @@ public class enemySpawn : MonoBehaviour
     public float intarval;
     GameObject waveObj;
     waveManager waveManage;
+    public float killCount;
+    public bool groundFlag;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,13 @@ public class enemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        groundFlag = false;
+        if(killCount >= 10)
+        {
+            groundFlag = true;
+            killCount = 0;
+        }
+
         second += Time.deltaTime;
         intarval = waveManage.EnemySpawnInterval;
         if(second >= intarval)
