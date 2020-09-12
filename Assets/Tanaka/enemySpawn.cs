@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class enemySpawn : MonoBehaviour
 {
@@ -12,17 +13,22 @@ public class enemySpawn : MonoBehaviour
     waveManager waveManage;
     public float killCount;
     public bool groundFlag;
+    [SerializeField]
+    GameObject slider;
+    Slider coundGauge;
     // Start is called before the first frame update
     void Start()
     {
         waveObj = GameObject.Find("WaveManager");
         waveManage = waveObj.GetComponent<waveManager>();
+        coundGauge = slider.GetComponent<Slider>();
         intarval = waveManage.EnemySpawnInterval;
     }
 
     // Update is called once per frame
     void Update()
     {
+        coundGauge.value = killCount;
         groundFlag = false;
         if(killCount >= 10)
         {

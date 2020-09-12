@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3045410232507679834}
   - component: {fileID: 2438009098698130474}
   m_Layer: 0
-  m_Name: enemyHit
+  m_Name: enemyhit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +222,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 0, a: 1}
+      maxColor: {r: 0, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -443,7 +443,7 @@ ParticleSystem:
     startRotationX:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 3.1415927
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -496,7 +496,7 @@ ParticleSystem:
     startRotationY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 3.1415927
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4767,7 +4767,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72622bca1f826aa43bd64387f8538493, type: 2}
+  - {fileID: 2100000, guid: e816338cd90d5d04da9d6f676e1157da, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4788,14 +4788,14 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
-  m_RenderMode: 0
+  m_SortingOrder: 11
+  m_RenderMode: 1
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 2
+  m_LengthScale: 1
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0

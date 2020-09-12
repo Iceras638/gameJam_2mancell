@@ -25,10 +25,15 @@ public class playerMove : MonoBehaviour
 
     Animator animator;   // アニメーション
 
+    public AudioClip playerShotAudio,playerFallAudio,playerKnockbackAudio;
+    private AudioSource audioSource;
+
 
     // Use this for initialization
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
+
         ManageObject = GameObject.Find("ManagerObj");
         fadeManager = ManageObject.GetComponent<SceneFadeManager>();
         waveObj = GameObject.Find("WaveManager");
@@ -70,7 +75,18 @@ public class playerMove : MonoBehaviour
         {
             //gameObject.tag = "MovePlayer";
         }
+        //if (deadFlag == true)
+        //{
+            //Debug.Log("aaa"); 
+            //second += Time.deltaTime;
+            //if (second > 2)
+            //{
+                //fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
+            //}
+        //}
+
         Move();
+
     }
 
     // ② 入力に応じて移動後の位置を算出
@@ -80,8 +96,10 @@ public class playerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            audioSource.clip = playerShotAudio;
+            audioSource.Play();
             target = transform.position - MOVEX;
-                Instantiate(bullet, transform.position, Quaternion.identity);
+                Instantiate(bullet, transform.position, Quaternion.Euler(0,0,90));
             SetAnimationParam(1);
             x = speed;
             y = 0;
@@ -89,8 +107,11 @@ public class playerMove : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            audioSource.clip = playerShotAudio;
+            audioSource.Play();
+
             target = transform.position + MOVEX;
-                Instantiate(bullet, transform.position, Quaternion.identity);
+                Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 90));
             SetAnimationParam(2);
 
             x = -speed;
@@ -100,6 +121,9 @@ public class playerMove : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            audioSource.clip = playerShotAudio;
+            audioSource.Play();
+
             target = transform.position - MOVEY;
                 Instantiate(bullet, transform.position, Quaternion.identity);
             SetAnimationParam(3);
@@ -111,6 +135,9 @@ public class playerMove : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            audioSource.clip = playerShotAudio;
+            audioSource.Play();
+
             target = transform.position + MOVEY;
                 Instantiate(bullet, transform.position, Quaternion.identity);
             SetAnimationParam(0);
@@ -140,11 +167,14 @@ public class playerMove : MonoBehaviour
         {
             if (collision.gameObject.tag == "Uenemy")
             {
+                audioSource.clip = playerKnockbackAudio;
+                audioSource.Play();
+
                 knockbackFlag = true;
                 target = prevPos;
                 if (transform.position == prevPos)
                 {
-
+                    SetAnimationParam(3);
                     target = transform.position - MOVEY * 10;
                 }
                 damage++;
@@ -152,12 +182,15 @@ public class playerMove : MonoBehaviour
             }
             if (collision.gameObject.tag == "Renemy")
             {
+                audioSource.clip = playerKnockbackAudio;
+                audioSource.Play();
+
                 knockbackFlag = true;
 
                 target = prevPos;
                 if (transform.position == prevPos)
                 {
-
+                    SetAnimationParam(1);
                     target = transform.position - MOVEX * 10;
                 }
                 damage++;
@@ -165,12 +198,15 @@ public class playerMove : MonoBehaviour
             }
             if (collision.gameObject.tag == "Lenemy")
             {
+                audioSource.clip = playerKnockbackAudio;
+                audioSource.Play();
+
                 knockbackFlag = true;
 
                 target = prevPos;
                 if (transform.position == prevPos)
                 {
-
+                    SetAnimationParam(2);
                     target = transform.position + MOVEX * 10;
                 }
                 damage++;
@@ -178,11 +214,15 @@ public class playerMove : MonoBehaviour
             }
             if (collision.gameObject.tag == "Denemy")
             {
+                audioSource.clip = playerKnockbackAudio;
+                audioSource.Play();
+
                 knockbackFlag = true;
 
                 target = prevPos;
                 if (transform.position == prevPos)
                 {
+                    SetAnimationParam(0);
                     target = transform.position + MOVEY * 10;
                 }
                 damage++;
@@ -195,9 +235,20 @@ public class playerMove : MonoBehaviour
         {
             if (knockbackFlag == false) 
             {
+                audioSource.clip = playerFallAudio;
+                audioSource.Play();
+
                 deadFlag = true;
-                step = 0;
+                //step = 0;
+                prevPos = collision.gameObject.transform.position;
+                target = prevPos;
                 //target = transform.position;
+                //second += Time.deltaTime;
+                //if(second>2)
+                //{
+                //    fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
+
+                //}
                 fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
             }
 
@@ -212,6 +263,35 @@ public class playerMove : MonoBehaviour
         {
             target = prevPos;
             knockbackFlag = false;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "none")
+        {
+            if (knockbackFlag == false)
+            {
+                if(deadFlag ==false)
+                {
+                    audioSource.clip = playerFallAudio;
+                    audioSource.Play();
+
+                    //step = 0;
+                    prevPos = collision.gameObject.transform.position;
+                    target = prevPos;
+                    //target = transform.position;
+                    //second += Time.deltaTime;
+                    //if(second>2)
+                    //{
+                    //    fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
+
+                    //}
+                    fadeManager.fadeOutStart(0, 0, 0, 0, "Result");
+                    deadFlag = true;
+
+                }
+            }
+
         }
     }
 }

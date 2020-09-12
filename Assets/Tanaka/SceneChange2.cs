@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class SceneChange : MonoBehaviour
+public class SceneChange2 : MonoBehaviour
 {
     GameObject ManageObject;
     SceneFadeManager fadeManager;
@@ -22,11 +21,11 @@ public class SceneChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(trigger == false)
+        if (trigger == false)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                fadeManager.fadeOutStart(0, 0, 0, 0, "Exposition");
+                fadeManager.fadeOutStart(0, 0, 0, 0, "GamePlay");
                 trigger = true;
             }
 

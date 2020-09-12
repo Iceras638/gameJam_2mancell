@@ -12,10 +12,14 @@ public class enemyMove : MonoBehaviour
     GameObject waveObj,spawnObj;
     waveManager waveManage;
     enemySpawn spawnManage;
+    public AudioClip enemyDeadAudio;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
+
         waveObj = GameObject.Find("WaveManager");
         waveManage = waveObj.GetComponent<waveManager>();
         spawnObj = GameObject.Find("EnemySpawn");
@@ -79,11 +83,15 @@ public class enemyMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet") 
         {
+            audioSource.PlayOneShot(enemyDeadAudio);
+
             Instantiate(deadParticle, transform.position, Quaternion.identity);
             spawnManage.killCount++;
             scoreManager.score += 300;
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+            transform.position = new Vector3(10, 0, 0);
+            stopFlag = true;
+            //gameObject.SetActive(false);
+            Destroy(gameObject,2);
         }
         if(collision.gameObject.tag == "Player")
         {
