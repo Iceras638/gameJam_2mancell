@@ -13,9 +13,14 @@ public class waveManager : MonoBehaviour
     float second,speedlv;
     [SerializeField]
     GameObject speedLv = null;
+
+    public AudioClip speedup;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
+
         speedlv = 1;
     }
 
@@ -36,7 +41,9 @@ public class waveManager : MonoBehaviour
             {
                 GroundTime = 0.5f;
             }
+
             speedlv++;
+            audioSource.PlayOneShot(speedup);
 
             Text speedLvText = speedLv.GetComponent<Text>();
             speedLvText.text = "Speed Lv:" + speedlv;

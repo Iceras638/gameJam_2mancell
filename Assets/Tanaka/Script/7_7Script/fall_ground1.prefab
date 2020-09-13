@@ -142,8 +142,7 @@ GameObject:
   - component: {fileID: 7234646175896468224}
   - component: {fileID: 5215153398763850602}
   - component: {fileID: 6021247126971790079}
-  - component: {fileID: 875780413710118901}
-  - component: {fileID: 8903587455749709651}
+  - component: {fileID: 227173664155766393}
   m_Layer: 0
   m_Name: cloud_block
   m_TagString: Untagged
@@ -262,7 +261,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &875780413710118901
+--- !u!114 &227173664155766393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,28 +270,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4120755082308338251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39c616538b3b92149a39a2469882fc94, type: 3}
+  m_Script: {fileID: 11500000, guid: dfdfb468fc1eb16408916df9652134fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &8903587455749709651
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4120755082308338251}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 435457c004b00b64ca36e1b532aa3e22, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4584844193283234212
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,10 +282,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 337514348945711494}
-  - component: {fileID: 66129508015272493}
+  - component: {fileID: -6883590225135412395}
   - component: {fileID: 2334865527513270556}
   m_Layer: 0
-  m_Name: fall_ground
+  m_Name: fall_ground1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,7 +307,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &66129508015272493
+--- !u!114 &-6883590225135412395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -336,7 +316,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4584844193283234212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 059724fc460f5be4d8595aead32b6bdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 499fbbb0039563242af3ac7f5bb8814c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   limit: 3

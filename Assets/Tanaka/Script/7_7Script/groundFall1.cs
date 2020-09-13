@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class groundFall : MonoBehaviour
+public class groundFall1 : MonoBehaviour
 {
     //public GameObject fall;
     bool hitFlag, fallFlag;
@@ -13,7 +13,7 @@ public class groundFall : MonoBehaviour
     GameObject waveObj;
     waveManager waveManage;
     GameObject spawnObj;
-    enemySpawn spawnManage;
+    enemySpawn1 spawnManage;
 
     GameObject childGround,childNone;
 
@@ -24,7 +24,7 @@ public class groundFall : MonoBehaviour
         waveObj = GameObject.Find("WaveManager");
         waveManage = waveObj.GetComponent<waveManager>();
         spawnObj = GameObject.Find("EnemySpawn");
-        spawnManage = spawnObj.GetComponent<enemySpawn>();
+        spawnManage = spawnObj.GetComponent<enemySpawn1>();
 
         childGround = transform.GetChild(0).gameObject;
         childNone = transform.GetChild(1).gameObject;
